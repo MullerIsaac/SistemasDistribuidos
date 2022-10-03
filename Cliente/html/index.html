@@ -1,0 +1,87 @@
+{% extends './master.html' %}
+
+{% block conteudo %}
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div class="col-lg-3 col-md-4 col-sm-12 bg-secondary">
+        <div class="container-fluid">
+          <div class="row py-2">
+            <div class="col-12 my-2">
+              <a href="/descobrir" class="btn btn-block btn-light">Descobrir dispositivos</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-lg-9 col-md-8 col-sm-12 bg-dark">
+      {% if testemsg %}
+      <div class="alert alert-{{type}} my-2">
+        {{testemsg}}
+      </div>
+      {% endif %}
+      {% if itens %}
+      <div class="container-fluid">
+        <div class="row py-2">
+          {% for i in itens%}
+            <div class="col-lg-3 col-md-3 col-sm-12 my-2">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-9 p-0">
+                    <img src="https://dummyimage.com/2560x2560/bbbbbb/777777.png" alt="" class="img-fluid">
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-3 text-center text-truncate bg-light py-2">
+                      <a href="/ver/{{i.id}}" class="text-dark">{{i.nome}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% elseif !itens && !dispositivo %}
+      <div class="alert alert-info my-2">
+        Ainda não há dispositivos descobertos
+      </div>
+      {% endif %}
+      {% if dispositivo %}
+      <div class="container-fluid">
+        <div class="row">
+          {% if resultado %}
+          <div class="my-2 col-12 alert alert-info">
+            Resultado da operação {{op}} : {{resultado}}
+          </div>
+          {% endif %}
+          <div class="my-3 offset-lg-2 col-lg-8 offset-md-2 col-md-8 offset-sm-0 col-sm-12">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-6 offset-3">
+                  <img src="https://dummyimage.com/2560x2560/bbbbbb/777777.png" alt="" class="img-fluid">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 offset-3 text-center text-light">
+                  {{dispositivo.nome}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 my-2">
+            <form action="/executar" method="post">
+              <h4 class="text-light">Operações</h4>
+              <select class="form-control my-2" name="op">
+                {% for op in dispositivo.ops %}
+                  <option value="{{dispositivo.id}}-{{op}}">{{op}}</option>
+                {% endfor %}
+              </select>
+              <button type="submit" class="btn btn-block btn-secondary">Executar operação</button>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
