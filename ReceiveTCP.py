@@ -21,12 +21,13 @@ class ReceiveTCP(Thread):
         try:
             self.socket.bind((self.server_tcp_host, self.server_tcp_port))
             self.socket.listen()
+            print("Socket TCP criado")
         except OSError:
             print("Erro na criação do scoket")
         
         while True:
             try:
-                conn, addr = self.socket.accept()
+                conn = self.socket.accept()
                 handler = TCPHandler(self.disp_host, self.disp_port, self.server_udp_host, self.server_udp_port, conn, self.server_id, self.lista)
                 handler.start()
             except InterruptedError:

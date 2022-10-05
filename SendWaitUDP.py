@@ -20,12 +20,9 @@ class SendWaitUDP(Thread):
     def configurar(self):
         try:
             self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            #if(self.listen_all == True):
-            #    self.socket.bind(('',self.port))
-            #else:
             self.socket.bind((self.server_host,self.server_port))
         except OSError:
-            print("Erro na criação do socket. Verifique se a porta "+str(self.port)+" já está sendo utilizada")
+            print("Erro na criação do socket SendWaitUDP. Verifique se a porta "+str(self.port)+" já está sendo utilizada")
         try:
             group = socket.inet_aton(self.disp_host)
             mreq = struct.pack("4sl",group,socket.INADDR_ANY)

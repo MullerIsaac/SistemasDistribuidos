@@ -19,12 +19,11 @@ class Gateway(Thread):
 
     def descobrir(self):
         print("Descobrindo dispositivos...")
-        del self.lista[:]
         snd = SendUDP(self.disp_host, self.disp_port)
         msg = message_pb2.GatewayDispositivo()
         msg.tipo = message_pb2.GatewayDispositivo.Tipo.DESCOBERTA
         snd.send(msg.SerializeToString())
-        t = Timer(randint(20,70)*0.02,self.descobrir)
+        t = Timer(5,self.descobrir)
         t.start()
 
     def iniciar(self):
@@ -33,6 +32,7 @@ class Gateway(Thread):
         self.descobrir()
 
     def run(self):
+        print("Iniciando servidor...")
         self.server_id = str(get_ident())
         self.udp_receiver = ReceiveUDP(self.server_udp_host,self.server_udp_port,self.disp_host,self.disp_port,self.server_id,self.lista)
         self.tcp_receiver = ReceiveTCP(self.server_tcp_host,self.server_tcp_port,self.server_udp_host,self.server_udp_port,self.disp_host,self.disp_port,self.server_id,self.lista)

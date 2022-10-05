@@ -25,9 +25,10 @@ class DispUDP(Thread):
     def configurar(self):
         try:
             self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-            self.socket.bind((self.disp_host,self.disp_port))
+            self.socket.bind((self.disp_host, self.disp_port))
+            print("Socket DispUDP criado")
         except OSError:
-            print("Erro na criação do socket. Verifique se a porta "+str(self.disp_port)+" já está sendo utilizada")
+            print("Erro na criação do socket. Verifique se a porta DispUDP"+str(self.disp_port)+" já está sendo utilizada")
         try:
             group = socket.inet_aton(self.disp_host)
             mreq = struct.pack("4sl",group,socket.INADDR_ANY)
@@ -45,8 +46,6 @@ class DispUDP(Thread):
     def aparecer(self):
         print("Aparecendo...")
         self.disponivel = True
-        t = Timer(randint(50,100)*0.5,self.sumir)
-        t.start()
 
     def receive(self):
 
@@ -54,7 +53,9 @@ class DispUDP(Thread):
 
         while True:
                 try:
-                    msg, addr = self.socket.recvfrom(1024)
+                    s = (self.socket.getsockname())
+                    print(s)
+                    msg, addr = self.socket.recv(1024)
                 except InterruptedError:
                     print("Execução interrompida")
                 else:
@@ -73,7 +74,7 @@ class DispUDP(Thread):
                                 disp = message_pb2.Dispositivo()
                                 disp.nome = self.nome
                                 disp.id = self.id
-                                disp.operacao.extend(self.ops)
+                                disp.operacoes.extend(self.ops)
                                 response.dispositivo.CopyFrom(disp)
                                 snd = SendUDP(self.server_host,self.server_port)
                                 snd.send(response.SerializeToString())
@@ -104,4 +105,5 @@ class DispUDP(Thread):
         if(self.is_continuo == False):
             t = Timer(randint(50,100)*0.5,self.sumir)
             t.start()
+        print("Tentando criar o DispDUP")
         self.receive()

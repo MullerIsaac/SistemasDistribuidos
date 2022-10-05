@@ -19,7 +19,7 @@ router.get('/descobrir',function(req,res){
 
   var timeout = 3000;
 
-  var conn = net.createConnection({ port : 6000, host: '127.0.0.1'},() => {
+  var conn = net.createConnection({ port : 9999, host: '127.0.0.1'},() => {
 
     msg = mensagens.GatewayClient.encode({ tipo : mensagens.GatewayClient.Tipo.DESCOBERTA });
 

@@ -1,6 +1,5 @@
 import socket
 import struct
-from SendUDP import SendUDP
 from threading import Thread, get_ident
 import message_pb2
 import sys
@@ -20,9 +19,11 @@ class ReceiveUDP(Thread):
     def configurar(self):
         try:
             self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            print("Antes de dar erro")
             self.socket.bind((self.server_host,self.server_port))
+            print("Socket ReceiveUDP criado")
         except OSError:
-            print("Erro na criação do socket. Verifique se a porta "+str(self.server_port)+" já está sendo utilizada")
+            print("Erro na criação do socket. Verifique se a porta ReceiveUDP"+str(self.server_port)+" já está sendo utilizada")
         try:
             group = socket.inet_aton(self.server_host)
             mreq = struct.pack("4sl",group,socket.INADDR_ANY)
@@ -37,7 +38,7 @@ class ReceiveUDP(Thread):
 
         while True:
             try:
-                msg, addr = self.socket.recvfrom(1024)
+                msg, addr = self.socket.recv(1024)
             except InterruptedError:
                 print("Execução interrompida")
             else:
@@ -62,5 +63,5 @@ class ReceiveUDP(Thread):
 
 
     def run(self):
-
+        print("Tentando criar o ReceiveUDP")
         self.receive()

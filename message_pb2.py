@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rmessage.proto\x12\x03sd3\"\xe1\x01\n\rGatewayClient\x12%\n\x04tipo\x18\x01 \x01(\x0e\x32\x17.sd3.GatewayClient.Tipo\x12&\n\x0c\x64ispositivos\x18\x02 \x03(\x0b\x32\x10.sd3.Dispositivo\x12\x17\n\x0fid_dispositivos\x18\x03 \x01(\t\x12\x10\n\x08operacao\x18\x04 \x01(\t\x12\x10\n\x08resposta\x18\x05 \x01(\t\"D\n\x04Tipo\x12\x0e\n\nDESCOBERTA\x10\x00\x12\x10\n\x0c\x44ISPOSITIVOS\x10\x01\x12\x0c\n\x08OPERACAO\x10\x02\x12\x0c\n\x08RESPOSTA\x10\x03\"\xf6\x01\n\x12GatewayDispositivo\x12*\n\x04tipo\x18\x01 \x01(\x0e\x32\x1c.sd3.GatewayDispositivo.Tipo\x12%\n\x0b\x64ispositivo\x18\x02 \x01(\x0b\x32\x10.sd3.Dispositivo\x12\x16\n\x0eid_dispositivo\x18\x03 \x01(\t\x12\x10\n\x08operacao\x18\x04 \x01(\t\x12\x10\n\x08resposta\x18\x05 \x01(\t\"Q\n\x04Tipo\x12\x0e\n\nDESCOBERTA\x10\x00\x12\x10\n\x0c\x44ISPOSITIVOS\x10\x01\x12\x0c\n\x08OPERACAO\x10\x02\x12\x0c\n\x08RESPOSTA\x10\x03\x12\x0b\n\x07\x41NUNCIO\x10\x04\":\n\x0b\x44ispositivo\x12\x0c\n\x04nome\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x11\n\toperacoes\x18\x03 \x03(\tb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rmessage.proto\x12\x03sd3\"\xe1\x01\n\rGatewayClient\x12%\n\x04tipo\x18\x01 \x01(\x0e\x32\x17.sd3.GatewayClient.Tipo\x12&\n\x0c\x64ispositivos\x18\x02 \x03(\x0b\x32\x10.sd3.Dispositivo\x12\x17\n\x0fid_dispositivos\x18\x03 \x01(\t\x12\x10\n\x08operacao\x18\x04 \x01(\t\x12\x10\n\x08resposta\x18\x05 \x01(\t\"D\n\x04Tipo\x12\x0e\n\nDESCOBERTA\x10\x00\x12\x10\n\x0c\x44ISPOSITIVOS\x10\x01\x12\x0c\n\x08OPERACAO\x10\x02\x12\x0c\n\x08RESPOSTA\x10\x03\"\xf5\x01\n\x12GatewayDispositivo\x12*\n\x04tipo\x18\x01 \x01(\x0e\x32\x1c.sd3.GatewayDispositivo.Tipo\x12%\n\x0b\x64ispositivo\x18\x02 \x01(\x0b\x32\x10.sd3.Dispositivo\x12\x16\n\x0eid_dispositivo\x18\x03 \x01(\t\x12\x10\n\x08operacao\x18\x04 \x01(\t\x12\x10\n\x08resposta\x18\x05 \x01(\t\"P\n\x04Tipo\x12\x0e\n\nDESCOBERTA\x10\x00\x12\x0f\n\x0b\x44ISPOSITIVO\x10\x01\x12\x0c\n\x08OPERACAO\x10\x02\x12\x0c\n\x08RESPOSTA\x10\x03\x12\x0b\n\x07\x41NUNCIO\x10\x04\":\n\x0b\x44ispositivo\x12\x0c\n\x04nome\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x11\n\toperacoes\x18\x03 \x03(\tb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'message_pb2', globals())
@@ -25,9 +25,9 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _GATEWAYCLIENT_TIPO._serialized_start=180
   _GATEWAYCLIENT_TIPO._serialized_end=248
   _GATEWAYDISPOSITIVO._serialized_start=251
-  _GATEWAYDISPOSITIVO._serialized_end=497
+  _GATEWAYDISPOSITIVO._serialized_end=496
   _GATEWAYDISPOSITIVO_TIPO._serialized_start=416
-  _GATEWAYDISPOSITIVO_TIPO._serialized_end=497
-  _DISPOSITIVO._serialized_start=499
-  _DISPOSITIVO._serialized_end=557
+  _GATEWAYDISPOSITIVO_TIPO._serialized_end=496
+  _DISPOSITIVO._serialized_start=498
+  _DISPOSITIVO._serialized_end=556
 # @@protoc_insertion_point(module_scope)

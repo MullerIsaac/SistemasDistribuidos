@@ -23,7 +23,7 @@ message GatewayDispositivo{
 
     enum Tipo{
         DESCOBERTA = 0;
-        DISPOSITIVOS = 1;
+        DISPOSITIVO = 1;
         OPERACAO = 2;
         RESPOSTA = 3;
         ANUNCIO =4;
