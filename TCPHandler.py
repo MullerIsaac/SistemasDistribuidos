@@ -23,17 +23,17 @@ class TCPHandler(Thread):
         except InterruptedError:
             print("Conexão interrompida")
         try:
-            mensagem = message_pb2.GatewayClient()
+            mensagem = message_pb2.Request()
             mensagem.ParseFromString(data)
             try:
-                if(mensagem.tipo == message_pb2.GatewayClient.Tipo.DESCOBERTA):
+                if(mensagem.tipo == message_pb2.Request.Tipo.DESCOBERTA):
                     # Manda mensagem UDP multicast para grupo de dispositivos
-                    response = message_pb2.GatewayClient()
+                    response = message_pb2.Response()
                     print("Lista de dispositivos: "+str(self.lista))
-                    response.tipo = message_pb2.GatewayClient.Tipo.DISPOSITIVOS
+                    response.tipo = message_pb2.Response.Tipo.DISPOSITIVOS
                     response.dispositivos.extend(self.lista)
                     self.conn.send(response.SerializeToString())
-                elif(mensagem.tipo == message_pb2.GatewayClient.Tipo.OPERACAO):
+                elif(mensagem.tipo == message_pb2.Request.Tipo.OPERACAO):
                     # Manda mensagem UDP multicast para grupo de dispositivo
                     reqmsg = message_pb2.GatewayDispositivo()
                     reqmsg.tipo = message_pb2.GatewayDispositivo.Tipo.OPERACAO
@@ -41,8 +41,8 @@ class TCPHandler(Thread):
                     reqmsg.operacao = mensagem.operacao
                     rcv = SendWaitUDP(self.disp_host,self.disp_port,self.server_host,self.server_port,reqmsg)
                     res = rcv.receive()
-                    response = message_pb2.GatewayClient()
-                    response.tipo = message_pb2.GatewayClient.Tipo.RESPOSTA
+                    response = message_pb2.Response()
+                    response.tipo = message_pb2.Response.Tipo.RESPOSTA
                     response.id_dispositivos = res.id_dispositivos
                     response.resposta = res.resposta
                     self.conn.send(response.SerializeToString())

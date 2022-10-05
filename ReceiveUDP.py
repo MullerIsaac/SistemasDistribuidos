@@ -38,7 +38,7 @@ class ReceiveUDP(Thread):
 
         while True:
             try:
-                msg, addr = self.socket.recv(1024)
+                msg, addr = self.socket.recvfrom(1024)
             except InterruptedError:
                 print("Execução interrompida")
             else:
@@ -47,9 +47,9 @@ class ReceiveUDP(Thread):
                     ret.ParseFromString(msg)
                     if( ret.tipo == message_pb2.GatewayDispositivo.Tipo.ANUNCIO or ret.tipo == message_pb2.GatewayDispositivo.Tipo.DISPOSITIVO ):
                         if( ret.tipo == message_pb2.GatewayDispositivo.Tipo.DISPOSITIVO ):
-                            print("Servidor descobrindo dispositivo: "+ret.id_dispositivo)
+                            print("Servidor descobrindo dispositivo: "+ret.dispositivo.id)
                         else:
-                            print("Servidor recebendo anuncio: "+ret.id_dispositivo)
+                            print("Servidor recebendo anuncio: "+ret.dispositivo.id)
                         c = False
                         for j in range(0,len(self.lista)):
                             if( self.lista[j].id == ret.dispositivo.id ):

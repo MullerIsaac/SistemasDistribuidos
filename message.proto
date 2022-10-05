@@ -2,21 +2,29 @@ syntax = "proto3";
 
 package sd3;
 
-message GatewayClient{
 
+message Response{
     enum Tipo{
-        DESCOBERTA = 0;
-        DISPOSITIVOS = 1;
-        OPERACAO = 2;
-        RESPOSTA = 3;
+        DISPOSITIVOS = 0;
+        RESPOSTA = 1;
     }
 
     Tipo tipo = 1;
     repeated Dispositivo dispositivos = 2;
     string id_dispositivos = 3;
-    string operacao = 4;
-    string resposta = 5;
+    string resposta = 4;
+}
 
+message Request{
+
+    enum Tipo{
+        DESCOBERTA = 0;
+        OPERACAO = 1;
+    }
+
+    Tipo tipo = 1;
+    string id_dispositivo = 2;
+    string operacao = 3;
 }
 
 message GatewayDispositivo{

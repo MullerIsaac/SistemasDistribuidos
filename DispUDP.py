@@ -55,7 +55,7 @@ class DispUDP(Thread):
                 try:
                     s = (self.socket.getsockname())
                     print(s)
-                    msg, addr = self.socket.recv(1024)
+                    msg, addr = self.socket.recvfrom(1024)
                 except InterruptedError:
                     print("Execução interrompida")
                 else:

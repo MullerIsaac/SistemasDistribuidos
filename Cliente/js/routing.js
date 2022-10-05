@@ -21,7 +21,7 @@ router.get('/descobrir',function(req,res){
 
   var conn = net.createConnection({ port : 9999, host: '127.0.0.1'},() => {
 
-    msg = mensagens.GatewayClient.encode({ tipo : mensagens.GatewayClient.Tipo.DESCOBERTA });
+    msg = mensagens.Request.encode({ tipo : mensagens.Request.Tipo.DESCOBERTA });
 
     conn.write(msg);
 
@@ -39,7 +39,7 @@ router.get('/descobrir',function(req,res){
 
   conn.on('data',function(data){
 
-      msg = new mensagens.GatewayClient.decode(data)
+      msg = new mensagens.Request.decode(data)
 
       dispositivos = msg.dispositivos
 
@@ -108,8 +108,8 @@ router.post('/executar',function(req,res){
 
   var conn = net.createConnection({ port : 9999, host: '127.0.0.1'},() => {
 
-    msg = mensagens.GatewayClient.encode({
-      tipo : mensagens.GatewayClient.Tipo.OPERACAO,
+    msg = mensagens.Request.encode({
+      tipo : mensagens.Request.Tipo.OPERACAO,
       id_dispositivo : id,
       operacao : op
     });
@@ -128,13 +128,13 @@ router.post('/executar',function(req,res){
 
   conn.on('data',function(data){
 
-      var msg = new mensagens.GatewayClient.decode(data);
+      var msg = new mensagens.Response.decode(data);
 
-      var id = msg.id_dispositivo;
+      var id = msg.id_dispositivos;
 
       var resposta = msg.resposta;
 
-      var op = msg.operacao;
+      //var op = msg.operacao;
 
       var disp = [];
 
