@@ -5,7 +5,7 @@ from SendUDP import SendUDP
 import message_pb2
 from random import *
 
-class SensorTemperatura(Dispositivo,Thread):
+class ArCondicionado(Dispositivo,Thread):
 
     def __init__(self,disp_host,disp_port,server_host,server_port,dict,nome):
         Dispositivo.__init__(self,dict,nome)
@@ -15,22 +15,9 @@ class SensorTemperatura(Dispositivo,Thread):
         self.server_host = server_host
         self.server_port = server_port
         ops = {
-            'ler_temperatura' :  str(randint(0,40))+' C',
-            'ler_bateria' : 'Bateria em 45%'
+            'ler_temperatura' :  str(randint(0,30))+' C',
         }
-        self.addDictOp(ops)
-        
-    def envioContinuo(self):
-        print(self.nome+" enviando dados...")
-        snd = SendUDP(self.server_host,self.server_port)
-        msg = message_pb2.GatewayDispositivo()
-        msg.tipo = message_pb2.GatewayDispositivo.Tipo.RESPOSTA
-        opnome = "ler_temperatura"
-        msg.id_dispositivo = self.id
-        msg.operacao = opnome
-        snd.send(msg.SerializeToString())
-        t = Timer(0.5,self.envioContinuo)
-        t.start()
+        self.addDictOp(ops)   
 
     def anunciar(self):
         print("Anunciando "+self.nome+"...")
@@ -47,7 +34,6 @@ class SensorTemperatura(Dispositivo,Thread):
     def run(self):
         print("Iniciando dispositivo "+self.nome+" ...")
         self.id = str(get_ident())
-        self.udp_receiver = DispUDP(self.disp_host,self.disp_port,self.server_host,self.server_port,self.id,self.getDict(),self.nome, True)
+        self.udp_receiver = DispUDP(self.disp_host,self.disp_port,self.server_host,self.server_port,self.id,self.getDict(),self.nome)
         self.udp_receiver.start()
         self.anunciar()
-        self.envioContinuo()

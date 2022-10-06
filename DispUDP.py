@@ -46,6 +46,8 @@ class DispUDP(Thread):
     def aparecer(self):
         print("Aparecendo...")
         self.disponivel = True
+        t = Timer(randint(50,100)*0.5,self.sumir)
+        t.start()
 
     def receive(self):
 
@@ -53,8 +55,6 @@ class DispUDP(Thread):
 
         while True:
                 try:
-                    s = (self.socket.getsockname())
-                    print(s)
                     msg, addr = self.socket.recvfrom(1024)
                 except InterruptedError:
                     print("Execução interrompida")
