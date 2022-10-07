@@ -50,7 +50,7 @@ class SendWaitUDP(Thread):
                     # Desfaz a serialização da mensagem
                     ret = message_pb2.GatewayDispositivo()
                     ret.ParseFromString(msg)
-
+                    print(ret)
                     # Checa se a mensagem é do tipo RESPOSTA e se é resultado do método e do dispositivo adequado
                     if( ret.tipo == message_pb2.GatewayDispositivo.Tipo.RESPOSTA and ret.id_dispositivo == self.msg.id_dispositivo and ret.operacao == self.msg.operacao ):
                         break

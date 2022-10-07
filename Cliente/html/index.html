@@ -68,7 +68,7 @@
             <form action="/executar" method="post">
               <h4 class="text-light">Operações</h4>
               <select class="form-control my-2" name="op">
-                {% for op in dispositivo.ops %}
+                {% for op in dispositivo.operacoes %}
                   <option value="{{dispositivo.id}}-{{op}}">{{op}}</option>
                 {% endfor %}
               </select>

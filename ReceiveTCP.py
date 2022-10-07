@@ -27,7 +27,7 @@ class ReceiveTCP(Thread):
         
         while True:
             try:
-                conn = self.socket.accept()
+                conn, addr = self.socket.accept()
                 handler = TCPHandler(self.disp_host, self.disp_port, self.server_udp_host, self.server_udp_port, conn, self.server_id, self.lista)
                 handler.start()
             except InterruptedError:

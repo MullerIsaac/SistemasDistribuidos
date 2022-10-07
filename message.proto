@@ -50,5 +50,6 @@ message Dispositivo{
     string nome = 1;
     string id = 2;
     repeated string operacoes = 3;
+    
 }
 

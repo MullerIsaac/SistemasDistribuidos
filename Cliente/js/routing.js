@@ -19,7 +19,7 @@ router.get('/descobrir',function(req,res){
 
   var timeout = 3000;
 
-  var conn = net.createConnection({ port : 9999, host: '127.0.0.1'},() => {
+  var conn = net.createConnection({ port : 10999, host: '127.0.0.1'},() => {
 
     msg = mensagens.Request.encode({ tipo : mensagens.Request.Tipo.DESCOBERTA });
 
@@ -39,8 +39,8 @@ router.get('/descobrir',function(req,res){
 
   conn.on('data',function(data){
 
-      msg = new mensagens.Request.decode(data)
-
+      msg = new mensagens.Response.decode(data)
+      
       dispositivos = msg.dispositivos
 
       var itens = msg.dispositivos
@@ -98,7 +98,7 @@ router.get('/ausente',function(req,res){
 });
 
 router.post('/executar',function(req,res){
-
+  console.log(req.body)
   string = req.body.op.split('-')
 
   var op = string[1];
@@ -106,7 +106,7 @@ router.post('/executar',function(req,res){
 
   var timeout = 3000;
 
-  var conn = net.createConnection({ port : 9999, host: '127.0.0.1'},() => {
+  var conn = net.createConnection({ port : 10999, host: '127.0.0.1'},() => {
 
     msg = mensagens.Request.encode({
       tipo : mensagens.Request.Tipo.OPERACAO,

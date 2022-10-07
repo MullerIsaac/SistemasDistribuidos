@@ -43,7 +43,7 @@ class TCPHandler(Thread):
                     res = rcv.receive()
                     response = message_pb2.Response()
                     response.tipo = message_pb2.Response.Tipo.RESPOSTA
-                    response.id_dispositivos = res.id_dispositivos
+                    response.id_dispositivos = res.id_dispositivo
                     response.resposta = res.resposta
                     self.conn.send(response.SerializeToString())
             except InterruptedError :
